@@ -58,19 +58,18 @@ public class PlayerController : MonoBehaviour {
     }
 
 	// Check for collisions with other actors 
-    void OnTriggerEnter2D(Collider2D col) {
+    void OnTriggerEnter2D(Collider2D collider) {
 		// Are we colliding with a gem? if so, increase our score, destroy the gem.
-        if (col.gameObject.tag == "Gem") {
+        if (collider.gameObject.tag == "Gem") {
             score++;
-            Destroy(col.gameObject);
+            Destroy(collider.gameObject);
         }
 		// Are we colliding with an enemy?
-        else if (col.gameObject.tag == "Enemy") {
+        else if (collider.gameObject.tag == "Enemy") {
 	        // If we are jumping, destroy the enemy, increase our score.
             if (isJumping) {
-	            Destroy(col.gameObject);
+	            Destroy(collider.gameObject);
                 score++;
-
             }                       
             // Else set our hurt animation to true, and disable collisions. 
             else {
