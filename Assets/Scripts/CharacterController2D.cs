@@ -21,7 +21,7 @@ public class CharacterController2D : MonoBehaviour {
 
     private float k_JumpDelay = 0.1f;    // Delay to add to the jump action to avoid missing the animation
     private float m_JumpDelayTimer;      // Timer for delayed landing to allow the player's jump animation to complete
-    
+
     [Header("Events")]
     [Space]
 
@@ -46,8 +46,7 @@ public class CharacterController2D : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (m_JumpDelayTimer > 0) 
-        {
+        if (m_JumpDelayTimer > 0) {
             m_JumpDelayTimer -= Time.deltaTime;
             return;
         }
@@ -61,7 +60,7 @@ public class CharacterController2D : MonoBehaviour {
             if (colliders[i].gameObject != gameObject) {
                 m_Grounded = true;
                 if (!wasGrounded) {
-                    OnLandEvent.Invoke();   
+                    OnLandEvent.Invoke();
                 }
             }
         }
@@ -98,7 +97,7 @@ public class CharacterController2D : MonoBehaviour {
             else {
                 // Enable the collider when not crouching
                 if (m_CrouchDisableCollider != null) {
-                    m_CrouchDisableCollider.enabled = true;    
+                    m_CrouchDisableCollider.enabled = true;
                 }
 
                 if (m_wasCrouching) {
@@ -109,7 +108,7 @@ public class CharacterController2D : MonoBehaviour {
 
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-            
+
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
@@ -125,8 +124,7 @@ public class CharacterController2D : MonoBehaviour {
             }
         }
         // If the player should jump...
-        if (m_Grounded && jump)
-        {
+        if (m_Grounded && jump) {
             // Add a vertical force to the player.
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             m_Grounded = false;
